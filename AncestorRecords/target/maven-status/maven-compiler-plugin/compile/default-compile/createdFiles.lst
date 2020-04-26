@@ -1,0 +1,10 @@
+com\uncc\ticket\model\UsersEntity.class
+com\uncc\ticket\service\TicketService.class
+com\uncc\ticket\TicketApplication.class
+com\uncc\ticket\service\UsersService.class
+com\uncc\ticket\config\SpringSecurityConfig.class
+com\uncc\ticket\model\TicketEntity.class
+com\uncc\ticket\controller\UsersController.class
+com\uncc\ticket\repository\UsersRepository.class
+com\uncc\ticket\controller\TicketController.class
+com\uncc\ticket\repository\TicketRepository.class
