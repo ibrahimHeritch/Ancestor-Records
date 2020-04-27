@@ -26,8 +26,10 @@ public class UsersEntity implements Serializable {
     @NotBlank
     private String password;
     private String name;
-    private Boolean enabled = true;
-    private String authority = "ROLE_ADMIN";
+    @NotBlank
+    @OneToOne
+    @JoinColumn(name = "person_id",referencedColumnName = "id")
+    private PersonEntity person;
     @Column(updatable = false)
     @CreationTimestamp
     private LocalDateTime created_at;
@@ -47,20 +49,12 @@ public class UsersEntity implements Serializable {
         this.name = name;
     }
 
-    public String getAuthority() {
-        return authority;
+    public PersonEntity getPerson() {
+        return person;
     }
 
-    public void setAuthority(String authority) {
-        this.authority = authority;
-    }
-
-    public Boolean getEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(Boolean enabled) {
-        this.enabled = enabled;
+    public void setPerson(PersonEntity person) {
+        this.person = person;
     }
 
     public List<TicketEntity> getTickets() {
