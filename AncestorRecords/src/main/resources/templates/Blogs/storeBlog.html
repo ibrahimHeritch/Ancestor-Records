@@ -51,7 +51,7 @@
 
 
         <div class="form-group row">
-            <label class="col-form-label col-sm-3" for="content">Description : </label>
+            <label class="col-form-label col-sm-3" for="content">Post : </label>
             <div class="col-sm-9">
                 <textarea class="form-control" id="content" th:field="*{content}" style="height: 150px;"></textarea>
                 <div class="Validation" style="color: red" th:if="${#fields.hasErrors('content')}" th:errors="*{content}"></div>

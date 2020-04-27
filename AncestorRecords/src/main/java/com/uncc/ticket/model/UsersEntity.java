@@ -26,8 +26,7 @@ public class UsersEntity implements Serializable {
     @NotBlank
     private String password;
     private String name;
-    @NotBlank
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "person_id",referencedColumnName = "id")
     private PersonEntity person;
     @Column(updatable = false)

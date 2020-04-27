@@ -1,5 +1,6 @@
 package com.uncc.ticket.controller;
 
+import com.uncc.ticket.model.PersonEntity;
 import com.uncc.ticket.model.UsersEntity;
 import com.uncc.ticket.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,9 @@ public class UsersController {
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String registerUser(Model model) {
-        model.addAttribute("user", new UsersEntity());
+        UsersEntity user= new UsersEntity();
+        user.setPerson(new PersonEntity());
+        model.addAttribute("user", user);
         return "users/registerUser";
     }
 

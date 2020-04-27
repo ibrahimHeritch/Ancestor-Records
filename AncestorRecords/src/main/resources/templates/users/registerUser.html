@@ -14,9 +14,6 @@
 <body>
 
 <nav class="navbar navbar-expand-md navbar-dark bg-primary">
-    <a class="navbar-brand" href="#">
-        <img src="D:\schoolStuff\seClass\pleaseWork\AncestorRecords\src\main\resources\logo\logo.jpg" alt="Logo" style="width:40px;">
-    </a>
     <a class="navbar-brand abs" href="#">Ancestor Records</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
         <span class="navbar-toggler-icon"></span>
@@ -62,6 +59,54 @@
             <div class="col-sm-9">
                 <input class="form-control" id="name" th:field="*{name}" type="text">
                 <div class="Validation" style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-form-label col-sm-3" for="fname">First Name : </label>
+            <div class="col-sm-9">
+                <input class="form-control" id="fname" th:field="*{person.fname}" type="text">
+                <div class="Validation" style="color: red" th:if="${#fields.hasErrors('person.fname')}" th:errors="*{person.fname}"></div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-form-label col-sm-3" for="mname">Middle Name : </label>
+            <div class="col-sm-9">
+                <input class="form-control" id="mname" th:field="*{person.mname}" type="text">
+                <div class="Validation" style="color: red" th:if="${#fields.hasErrors('person.mname')}" th:errors="*{person.mname}"></div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-form-label col-sm-3" for="lname">Last Name : </label>
+            <div class="col-sm-9">
+                <input class="form-control" id="lname" th:field="*{person.lname}" type="text">
+                <div class="Validation" style="color: red" th:if="${#fields.hasErrors('person.lname')}" th:errors="*{person.lname}"></div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-form-label col-sm-3" for="city">City of birth : </label>
+            <div class="col-sm-9">
+                <input class="form-control" id="city" th:field="*{person.cityOfBirth}" type="text">
+                <div class="Validation" style="color: red" th:if="${#fields.hasErrors('person.cityOfBirth')}" th:errors="*{person.cityOfBirth}"></div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-form-label col-sm-3" for="country">Country of Birth: </label>
+            <div class="col-sm-9">
+                <input class="form-control" id="country" th:field="*{person.countryOfBirth}" type="text">
+                <div class="Validation" style="color: red" th:if="${#fields.hasErrors('person.countryOfBirth')}" th:errors="*{person.countryOfBirth}"></div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-form-label col-sm-3" for="DOB">Date of Birth: </label>
+            <div class="col-sm-9">
+                <input class="form-control" id="DOB" th:field="*{person.DOB}" type="date">
+                <div class="Validation" style="color: red" th:if="${#fields.hasErrors('person.DOB')}" th:errors="*{person.DOB}"></div>
             </div>
         </div>
 

@@ -19,16 +19,16 @@ public class PersonEntity {
     private Long id;
 
 
-    @NotBlank
+
     private String fname;
     private String mname;
-    @NotBlank
+
     private String lname;
-    @NotBlank
+
     private String cityOfBirth;
-    @NotBlank
+
     private String countryOfBirth;
-    @NotBlank
+
     private Date DOB;
 
     public PersonEntity() {

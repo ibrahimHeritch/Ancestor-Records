@@ -5,6 +5,7 @@ import com.uncc.ticket.model.UsersEntity;
 import com.uncc.ticket.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 
 import javax.transaction.Transactional;
 import java.util.List;
