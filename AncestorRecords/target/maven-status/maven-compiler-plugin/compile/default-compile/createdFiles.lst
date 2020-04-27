@@ -1,0 +1,7 @@
+com\uncc\ticket\controller\BlogController.class
+com\uncc\ticket\repository\PersonRepository.class
+com\uncc\ticket\model\BlogEntity.class
+com\uncc\ticket\service\BlogService.class
+com\uncc\ticket\service\PersonService.class
+com\uncc\ticket\repository\BlogRepository.class
+com\uncc\ticket\model\PersonEntity.class
