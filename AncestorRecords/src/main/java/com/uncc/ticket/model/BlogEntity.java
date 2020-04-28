@@ -8,7 +8,9 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.io.StringBufferInputStream;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "blogs")
@@ -26,6 +28,8 @@ public class BlogEntity {
     private String title;
     @NotBlank
     private String content;
+    @ManyToMany
+    List<PersonEntity> subjects;
     @Column(updatable = false)
     @CreationTimestamp
     private LocalDateTime created_at;
@@ -33,6 +37,14 @@ public class BlogEntity {
     private LocalDateTime updated_at;
 
     public BlogEntity() {
+    }
+
+    public List<PersonEntity> getSubjects() {
+        return subjects;
+    }
+
+    public void setSubjects(List<PersonEntity> subjects) {
+        this.subjects = subjects;
     }
 
     public void setTitle(String title) {
@@ -75,5 +87,23 @@ public class BlogEntity {
         this.updated_at = updated_at;
     }
 
+    public String getNamesOfSubjects(){
+        String s = "";
+        if (this.subjects == null){
+            s="Null subjects";
+        }else if( this.subjects.isEmpty()){
+            s= "No Subjects";
+        }else if(this.subjects.size()==1){
+            s= this.subjects.get(0).getName();
+        }else{
+            for(int i=0;i<this.subjects.size()-1;i++){
+                s+=this.subjects.get(i).getName();
+                s+=" ";
+            }
+            s+="and ";
+            s+=this.subjects.get(this.subjects.size()-1).getName();
+        }
+        return s;
+    }
 
 }

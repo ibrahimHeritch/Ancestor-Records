@@ -41,14 +41,23 @@
     <form th:action="@{/blogs/storeBlogs}" method="post" th:object="${blog}">
         <input type="hidden" th:field="*{id}">
         <div class="form-group row">
-            <label class="col-form-label col-sm-3" for="title">Name : </label>
+            <label class="col-form-label col-sm-3" for="title">Title : </label>
             <div class="col-sm-9">
                 <input class="form-control" id="title" th:field="*{title}" type="text">
                 <div class="Validation" style="color: red" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
             </div>
         </div>
+        <div class="row">
+            <label class="col-form-label col-sm-3">Subjects: </label>
+        </div>
 
+        <ul>
 
+            <li th:each="person : ${persons}">
+                <input type="checkbox" name="subjects" th:value="${person.id}">
+                <label th:text="${person.getName()}"></label>
+            </li>
+        </ul>
 
         <div class="form-group row">
             <label class="col-form-label col-sm-3" for="content">Post : </label>

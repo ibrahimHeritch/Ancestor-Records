@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.sql.Date;
+import java.util.List;
 
 
 @Entity
@@ -30,9 +31,19 @@ public class PersonEntity {
     private String countryOfBirth;
 
     private Date DOB;
+    @ManyToMany
+    List<BlogEntity> blogsAboutMe;
 
     public PersonEntity() {
 
+    }
+
+    public List<BlogEntity> getBlogsAboutMe() {
+        return blogsAboutMe;
+    }
+
+    public void setBlogsAboutMe(List<BlogEntity> blogsAboutMe) {
+        this.blogsAboutMe = blogsAboutMe;
     }
 
     public Long getId() {
@@ -49,6 +60,10 @@ public class PersonEntity {
 
     public String getLname() {
         return lname;
+    }
+
+    public String getName(){
+        return fname+" "+lname;
     }
 
     public String getCityOfBirth() {

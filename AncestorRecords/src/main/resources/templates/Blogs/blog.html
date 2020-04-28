@@ -54,7 +54,7 @@
         <tr th:each="blog :${blogs}">
             <th scope="row" th:text="${blog.getTitle()}"></th>
             <td th:text="${blog.getOwner().getName()}"></td>
-            <td th:text="SUBJECT_PLACEHOLDER"></td>
+            <td th:text="${blog.getNamesOfSubjects()}"></td>
             <td>
                 <a class="mb-2 btn btn-success" th:href="@{/blogs/edit/{id} (id=${blog.getId()})}" style="width: 80px">Edit</a>
                 <a class="mb-2 btn btn-danger" href="#" data-toggle="modal" th:data-target="'#delete'+${blog.getId()}" style="width: 80px">Delete</a>
