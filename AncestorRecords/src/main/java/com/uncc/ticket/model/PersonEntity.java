@@ -34,10 +34,24 @@ public class PersonEntity {
     @ManyToMany
     List<BlogEntity> blogsAboutMe;
 
+    @ManyToMany
+    List<PersonEntity> following;
+
     public PersonEntity() {
 
     }
 
+    public List<PersonEntity> getFollowing() {
+        return following;
+    }
+
+    public void setFollowing(List<PersonEntity> following) {
+        this.following = following;
+    }
+
+    public void addFollowing(PersonEntity person){
+        this.following.add(person);
+    }
     public List<BlogEntity> getBlogsAboutMe() {
         return blogsAboutMe;
     }

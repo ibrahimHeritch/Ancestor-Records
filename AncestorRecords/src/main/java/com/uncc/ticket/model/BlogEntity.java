@@ -98,7 +98,7 @@ public class BlogEntity {
         }else{
             for(int i=0;i<this.subjects.size()-1;i++){
                 s+=this.subjects.get(i).getName();
-                s+=" ";
+                s+=", ";
             }
             s+="and ";
             s+=this.subjects.get(this.subjects.size()-1).getName();

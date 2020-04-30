@@ -37,6 +37,8 @@ public class BlogController {
         return "blogs/Blog";
     }
 
+
+
     @RequestMapping(value = "/blogs/storeBlogs", method = RequestMethod.GET)
     public String showStoreBlog(Model model) {
         BlogEntity blog= new BlogEntity();

@@ -34,7 +34,9 @@ public class UsersEntity implements Serializable {
     private LocalDateTime created_at;
     @UpdateTimestamp
     private LocalDateTime updated_at;
-
+    @NotBlank
+    private String authority = "ROLE_ADMIN";
+    private Boolean enabled = true;
     @OneToMany(mappedBy = "users")
 
     private List<TicketEntity> tickets;
@@ -46,6 +48,22 @@ public class UsersEntity implements Serializable {
         this.email = email;
         this.password = password;
         this.name = name;
+    }
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public String getAuthority() {
+        return authority;
+    }
+
+    public void setAuthority(String authority) {
+        this.authority = authority;
     }
 
     public PersonEntity getPerson() {
