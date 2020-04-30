@@ -4,6 +4,7 @@ import com.uncc.ticket.model.PersonEntity;
 import com.uncc.ticket.model.UsersEntity;
 import com.uncc.ticket.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,7 +42,13 @@ public class UsersController {
             return "users/registerUser";
         }
         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
-        usersService.registerUser(user);
+
+        try {
+            usersService.registerUser(user);
+        } catch (DataIntegrityViolationException e) {
+            return "users/registerUser";
+        }
+
         return "redirect:";
     }
 }
