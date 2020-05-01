@@ -54,6 +54,9 @@
             <td th:text="${person.getLname()}"></td>
             <td>
                 <a class="mb-2 btn btn-success" th:href="@{/persons/follow/{id} (id=${person.getId()})}" style="width: 80px">follow</a>
+
+                <a class="mb-2 btn btn-success" th:href="@{/persons/family/{id} (id=${person.getId()})}" style="width: 150px">Add to Family</a>
+
             </td>
         </tr>
         </tbody>

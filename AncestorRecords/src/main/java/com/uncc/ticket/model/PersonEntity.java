@@ -31,7 +31,7 @@ public class PersonEntity {
     private String countryOfBirth;
 
     private Date DOB;
-    @ManyToMany
+    @ManyToMany(mappedBy="subjects")
     List<BlogEntity> blogsAboutMe;
 
     @ManyToMany

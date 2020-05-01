@@ -25,7 +25,6 @@ public class UsersEntity implements Serializable {
     private String email;
     @NotBlank
     private String password;
-    private String name;
     @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "person_id",referencedColumnName = "id")
     private PersonEntity person;
@@ -47,7 +46,6 @@ public class UsersEntity implements Serializable {
     public UsersEntity(String email, String password, String name){
         this.email = email;
         this.password = password;
-        this.name = name;
     }
 
     public Boolean getEnabled() {
@@ -104,14 +102,6 @@ public class UsersEntity implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public LocalDateTime getCreated_at() {

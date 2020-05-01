@@ -55,7 +55,8 @@ public class BlogController {
         Blog.setOwner(usersService.findByEmail(principal.getName()));
         List<PersonEntity> castSubjects= new ArrayList<>();
         for (String subject:subjects){
-            castSubjects.add(personService.findById(Long.parseLong(subject)));
+            PersonEntity castSubject =  personService.findById(Long.parseLong(subject));
+            castSubjects.add(castSubject);
         }
         Blog.setSubjects(castSubjects);
         BlogService.storeBlog(Blog);
