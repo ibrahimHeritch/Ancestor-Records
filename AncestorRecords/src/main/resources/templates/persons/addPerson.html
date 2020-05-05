@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Home</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/myStyle.css}"/>
+
+    <script th:src="@{/js/jquery-3.4.1.min.js}" type="text/javascript"></script>
+    <script th:src="@{/js/popper.min.js}" type="text/javascript"></script>
+    <script th:src="@{/js/bootstrap.min.js}" type="text/javascript"></script>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-md navbar-dark bg-primary">
+
+    <a class="navbar-brand abs" href="#">Ancestor Records</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="navbar-collapse collapse" id="collapsingNavbar">
+        <ul class="navbar-nav">
+
+        </ul>
+        <ul class="navbar-nav ml-auto">
+            <form class="form-inline" action="/search/searchResults">
+                <input class="form-control mr-sm-2" type="text" placeholder="Search">
+                <button class="btn btn-success" type="submit" >Search</button>
+            </form>
+            <li class="nav-item">
+                <a class="nav-item nav-link active text-right" th:href="@{/logout}"  >My Profile<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-item nav-link active text-right" th:href="@{/logout}"  >Log out<span class="sr-only">(current)</span></a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+
+<div class="mt-3" style="width: 600px; margin: auto; font-size: 16px;"> The purpose of this feature is to allow you to add a new person entity that doesn't exist. For example if you want too blog about your Grandpa, but your grandpa doesn't have an account you can use this feature to create a profile for him. </div>
+<div class="mt-3" style="width: 600px; margin: auto; font-size: 16px;"> Before adding a new person please make sure the person doesn't already have a profile by searching for them:</div>
+<div class="mt-3" style="width:500px; margin:auto; padding: 20px;">
+    <form class="form-inline" action="/search/searchResults">
+        <input class="form-control mr-sm-2" type="text" placeholder="Search">
+        <button class="btn btn-success" type="submit" >Search</button>
+    </form>
+</div>
+<div class="mt-3" style="width: 600px; margin: auto; font-size: 16px;"> Once satisfied they don't exist please proceed.</div>
+
+<div class="mt-5" style="width: 500px; margin: auto; font-size: 36px;">     Add a New Person</div>
+<div class="mt-3" style="width:500px; margin:auto; padding: 20px; border: 1px solid #e4e2dd">
+    <form th:action="@{/persons/addPersons}" method="post"  th:object="${person}">
+
+        <div class="form-group row">
+            <label class="col-form-label col-sm-3" for="fname">First Name : </label>
+            <div class="col-sm-9">
+                <input class="form-control" id="fname" th:field="*{fname}" type="text">
+                <div class="Validation" style="color: red" th:if="${#fields.hasErrors('fname')}" th:errors="*{fname}"></div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-form-label col-sm-3" for="mname">Middle Name : </label>
+            <div class="col-sm-9">
+                <input class="form-control" id="mname" th:field="*{mname}" type="text">
+                <div class="Validation" style="color: red" th:if="${#fields.hasErrors('mname')}" th:errors="*{mname}"></div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-form-label col-sm-3" for="lname">Last Name : </label>
+            <div class="col-sm-9">
+                <input class="form-control" id="lname" th:field="*{lname}" type="text">
+                <div class="Validation" style="color: red" th:if="${#fields.hasErrors('lname')}" th:errors="*{lname}"></div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-form-label col-sm-3" for="city">City of birth : </label>
+            <div class="col-sm-9">
+                <input class="form-control" id="city" th:field="*{cityOfBirth}" type="text">
+                <div class="Validation" style="color: red" th:if="${#fields.hasErrors('cityOfBirth')}" th:errors="*{cityOfBirth}"></div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-form-label col-sm-3" for="country">Country of Birth: </label>
+            <div class="col-sm-9">
+                <input class="form-control" id="country" th:field="*{countryOfBirth}" type="text">
+                <div class="Validation" style="color: red" th:if="${#fields.hasErrors('countryOfBirth')}" th:errors="*{countryOfBirth}"></div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-form-label col-sm-3" for="DOB">Date of Birth: </label>
+            <div class="col-sm-9">
+                <input class="form-control" id="DOB" th:field="*{DOB}" type="date">
+                <div class="Validation" style="color: red" th:if="${#fields.hasErrors('DOB')}" th:errors="*{DOB}"></div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-9"></div>
+            <div class="col-sm-3">
+                <button type="submit" class="btn btn-primary">Add</button>
+            </div>
+        </div>
+
+    </form>
+</div>
+</body>
+</html>

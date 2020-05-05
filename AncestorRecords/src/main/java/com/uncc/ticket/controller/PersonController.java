@@ -3,17 +3,17 @@ package com.uncc.ticket.controller;
 import com.uncc.ticket.model.BlogEntity;
 import com.uncc.ticket.model.PersonEntity;
 import com.uncc.ticket.model.RelationEntity;
+import com.uncc.ticket.model.UsersEntity;
 import com.uncc.ticket.service.PersonService;
 import com.uncc.ticket.service.RelationService;
 import com.uncc.ticket.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
@@ -54,6 +54,18 @@ public class PersonController {
         PersonEntity person = usersService.findByEmail(principal.getName()).getPerson();
         RelationEntity r= new RelationEntity(person,personService.findById(id),"UNKNOWN");
         relationService.storeRelation(r);
+        return "redirect:/";
+    }
+
+    @RequestMapping(value = "/persons/addPersons", method = RequestMethod.GET)
+    public String addPerson(Model model) {
+        model.addAttribute("person", new PersonEntity());
+        return "persons/AddPerson";
+    }
+
+    @RequestMapping(value = "/persons/addPersons", method = RequestMethod.POST)
+    public String storePerson(@ModelAttribute(name = "person") @Valid PersonEntity person, BindingResult bindingResult) {
+        personService.storePerson(person);
         return "redirect:/";
     }
 }
