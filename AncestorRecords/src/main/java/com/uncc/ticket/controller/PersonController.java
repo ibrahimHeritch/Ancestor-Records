@@ -32,8 +32,12 @@ public class PersonController {
     }
 
     @RequestMapping(value = "/search/searchResults", method = RequestMethod.GET)
-    public String showSearchResults(Model model) {
-        model.addAttribute("persons", personService.getAllPersons()); //change this
+    public String showSearchResults(Model model, Principal principal) {
+        UsersEntity user = usersService.findByEmail(principal.getName());
+        PersonEntity person = user.getPerson();
+        model.addAttribute("relation", new RelationEntity(person,person,"unknown"));
+        model.addAttribute("persons", personService.getAllPersons());
+
         return "search/searchResult";
     }
 
@@ -49,16 +53,16 @@ public class PersonController {
         return "redirect:/";
     }
 
-    @RequestMapping(value = "/persons/family/{id}", method = RequestMethod.GET)
-    public String addRelation(Model model,@PathVariable("id") Long id, Principal principal) {
-        PersonEntity person = usersService.findByEmail(principal.getName()).getPerson();
-        RelationEntity r= new RelationEntity(person,personService.findById(id),"UNKNOWN");
+    //Sets relation
+    @RequestMapping(value = "/persons/family/{id}", method = RequestMethod.POST)
+    public String addRelation(Model model, @ModelAttribute(name = "relation") @Valid RelationEntity Relation, @PathVariable("id") Long id, @RequestParam("relationType") String relationType, @RequestParam("otherPerson") PersonEntity otherPerson, Principal principal) {
+        System.out.println("Setting Relation...");
+        PersonEntity person1 = usersService.findByEmail(principal.getName()).getPerson();
+        System.out.println("P1: " + person1.getName());
+        PersonEntity person2 = otherPerson;
+        System.out.println("P2: " + person2.getName());
+        RelationEntity r= new RelationEntity(person1,person2, relationType);
         relationService.storeRelation(r);
-        if(person.getFollowing()==null){
-            person.setFollowing(new ArrayList<PersonEntity>());
-        }
-        person.addFollowing(personService.findById(id));
-        personService.storePerson(person);
         return "redirect:/";
     }
 

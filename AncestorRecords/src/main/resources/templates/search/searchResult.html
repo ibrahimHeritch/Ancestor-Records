@@ -43,7 +43,6 @@
 
 <div class="container-fluid m-0 p-4">
 
-
     <table class="table">
         <thead class="thead-light">
         <tr>
@@ -59,10 +58,41 @@
             <td th:text="${person.getMname()}"></td>
             <td th:text="${person.getLname()}"></td>
             <td>
+
                 <a class="mb-2 btn btn-success" th:href="@{/persons/follow/{id} (id=${person.getId()})}" style="width: 80px">follow</a>
 
-                <a class="mb-2 btn btn-success" th:href="@{/persons/family/{id} (id=${person.getId()})}" style="width: 150px">Add to Family</a>
+                <!-- Opens Modal -->
+                <a class="mb-2 btn btn-success" href="#" data-toggle="modal" th:data-target="'#family'+${person.getId()}" style="width: 80px">Add To Family</a>
 
+                <!-- "Add To Family" Modal -->
+                <form th:action="@{/persons/family/{id} (id=${person.getId()})}" method="post" th:object="${relation}">
+                    <input class="form-control" type="hidden" name="otherPerson" th:value="${person.getId()}">
+                    <div class="modal fade" th:id="'family'+${person.getId()}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Add To Family:</h5>
+                                    <!-- Input Field -->
+                                    <div class="form-group row">
+                                        <label class="col-form-label col-sm-3" for="relationType">Relation : </label>
+                                        <div class="col-sm-9">
+                                            <textarea class="form-control" id="relationType" name="relationType" th:value="${relationType}" style="height: 150px;"></textarea>
+                                            <!--<div class="Validation" style="color: red" th:if="${#fields.hasErrors('relationType')}" th:errors="*{relationType}"></div> -->
+                                        </div>
+                                    </div>
+
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button class="btn btn-primary form-control" type="submit">Add To Family</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </td>
         </tr>
         </tbody>

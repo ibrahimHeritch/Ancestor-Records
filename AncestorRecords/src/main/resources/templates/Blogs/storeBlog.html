@@ -59,11 +59,15 @@
 
         <ul>
 
-            <li th:each="person : ${persons}">
-                <input type="checkbox" name="subjects" th:value="${person.id}">
-                <label th:text="${person.getName()}"></label>
-            </li>
-        </ul>
+            <!-- Subject drop-down list -->
+            <button class="btn dropdown-toggle btn-primary btn-sm" data-toggle="dropdown"
+            >Subjects<span class="subjects"></span></button>
+            <ul class="dropdown-menu", style="height:40%; overflow:hidden; overflow-y:scroll;">
+                <li th:each="person : ${persons}">
+                    <input class="form-control" id=subjects type="checkbox" name="subjects" th:value="${person.id}">
+                    <label th:text="${person.getName()}"></label>
+                </li>
+            </ul>
 
         <div class="form-group row">
             <label class="col-form-label col-sm-3" for="content">Post : </label>
