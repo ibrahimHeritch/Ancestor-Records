@@ -54,6 +54,11 @@ public class PersonController {
         PersonEntity person = usersService.findByEmail(principal.getName()).getPerson();
         RelationEntity r= new RelationEntity(person,personService.findById(id),"UNKNOWN");
         relationService.storeRelation(r);
+        if(person.getFollowing()==null){
+            person.setFollowing(new ArrayList<PersonEntity>());
+        }
+        person.addFollowing(personService.findById(id));
+        personService.storePerson(person);
         return "redirect:/";
     }
 

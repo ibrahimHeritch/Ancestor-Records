@@ -32,6 +32,8 @@ public class BlogService {
         return blogRepository.findAllByOwner(user);
     }
 
+    public List<BlogEntity> getAllBlogsForUser(Long id, Long personId){return blogRepository.getAllBlogsForUser(id,personId);}
+
     public BlogEntity findById(Long id) { return blogRepository.getOne(id); }
 
     @Transactional

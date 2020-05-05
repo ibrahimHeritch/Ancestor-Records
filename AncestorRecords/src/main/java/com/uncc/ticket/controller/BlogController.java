@@ -33,7 +33,7 @@ public class BlogController {
     @RequestMapping(value = {"/", ""}, method = RequestMethod.GET)
     public String getBlogs(Model model, Principal principal) {
         UsersEntity user = usersService.findByEmail(principal.getName());
-        model.addAttribute("blogs", BlogService.getAllBlogsByUser(user));
+        model.addAttribute("blogs", BlogService.getAllBlogsForUser(user.getId(),user.getPerson().getId()));
         return "blogs/Blog";
     }
 
