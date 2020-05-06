@@ -84,4 +84,15 @@ public class PersonController {
         model.addAttribute("persons", personService.getAllPersons());
         return "persons/myProfile";
     }
+
+    @RequestMapping(value = "/persons/profiles/{id}", method = RequestMethod.GET)
+    public String showProfile(Model model, Principal principal, @PathVariable("id") Long id) {
+        PersonEntity person = personService.findById(id);
+        model.addAttribute("person", person);
+
+        return "persons/profile";
+
+
+
+    }
 }

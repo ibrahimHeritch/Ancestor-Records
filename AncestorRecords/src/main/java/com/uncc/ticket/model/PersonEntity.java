@@ -2,11 +2,14 @@ package com.uncc.ticket.model;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.uncc.ticket.EmbededId.RelationId;
 
 
+import javax.management.relation.Relation;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -36,6 +39,12 @@ public class PersonEntity {
 
     @ManyToMany
     List<PersonEntity> following;
+
+    @ManyToMany
+    public List<RelationEntity> myRelations;
+
+    @ManyToMany
+    public List<RelationEntity> outRelations;
 
     public PersonEntity() {
 
@@ -119,4 +128,26 @@ public class PersonEntity {
     public void setDOB(Date DOB) {
         this.DOB = DOB;
     }
+
+    public void addRelation(RelationEntity newRE) {
+        if(this.getRelations()==null){
+            this.setRelations(new ArrayList<RelationEntity>());
+        }
+        myRelations.add(newRE);
+    }
+
+    public void setRelations(List<RelationEntity> newRE) {this.myRelations = newRE;}
+
+    public List<RelationEntity> getRelations() { return myRelations; }
+
+    public void addOutRelation(RelationEntity newRE) {
+        if (this.getOutRelations() == null) {
+            this.setOutRelations(new ArrayList<RelationEntity>());
+        }
+        outRelations.add(newRE);
+    }
+
+    public void setOutRelations(List<RelationEntity> newRE) {this.outRelations = newRE;}
+
+    public List<RelationEntity> getOutRelations() { return outRelations; }
 }

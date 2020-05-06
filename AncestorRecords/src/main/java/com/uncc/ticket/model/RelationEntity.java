@@ -23,8 +23,9 @@ public class RelationEntity {
 
     public RelationEntity(PersonEntity person1, PersonEntity person2, @NotBlank String relationType) {
         this.Rid = new RelationId(person1,person2);
-        System.out.println(Rid);
         this.relationType = relationType;
+        person1.addRelation(this);
+        person2.addOutRelation(this);
     }
 
     public RelationId getRId() {

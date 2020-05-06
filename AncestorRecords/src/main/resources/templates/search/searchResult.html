@@ -59,7 +59,8 @@
             <td th:text="${person.getLname()}"></td>
             <td>
 
-                <a class="mb-2 btn btn-success" th:href="@{/persons/follow/{id} (id=${person.getId()})}" style="width: 80px">follow</a>
+                <a class="mb-2 btn btn-success" th:href="@{/persons/profiles/{id} (id=${person.getId()})}" style="width: 80px">View Profile</a>
+                <a class="mb-2 btn btn-success" th:href="@{/persons/follow/{id} (id=${person.getId()})}" style="width: 80px">Follow</a>
 
                 <!-- Opens Modal -->
                 <a class="mb-2 btn btn-success" href="#" data-toggle="modal" th:data-target="'#family'+${person.getId()}" style="width: 150px">Add To Family</a>
