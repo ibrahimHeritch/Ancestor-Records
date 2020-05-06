@@ -77,4 +77,11 @@ public class PersonController {
         personService.storePerson(person);
         return "redirect:/";
     }
+    
+    @RequestMapping(value = "/persons/myProfile", method = RequestMethod.GET)
+    public String profile(Model model) {
+        model.addAttribute("person", new PersonEntity());
+        model.addAttribute("persons", personService.getAllPersons());
+        return "persons/myProfile";
+    }
 }
