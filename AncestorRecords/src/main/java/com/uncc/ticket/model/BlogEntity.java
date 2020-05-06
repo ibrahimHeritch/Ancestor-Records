@@ -87,6 +87,13 @@ public class BlogEntity {
         this.updated_at = updated_at;
     }
 
+    public String isOwnedBy(PersonEntity p){
+        if(this.owner.getPerson().equals(p)){
+            return "true";
+        }
+        return "false";
+    }
+
     public String getNamesOfSubjects(){
         String s = "";
         if (this.subjects == null){

@@ -34,6 +34,7 @@ public class BlogController {
     public String getBlogs(Model model, Principal principal) {
         UsersEntity user = usersService.findByEmail(principal.getName());
         model.addAttribute("blogs", BlogService.getAllBlogsForUser(user.getId(),user.getPerson().getId()));
+        model.addAttribute("person",user.getPerson());
         return "blogs/Blog";
     }
 
