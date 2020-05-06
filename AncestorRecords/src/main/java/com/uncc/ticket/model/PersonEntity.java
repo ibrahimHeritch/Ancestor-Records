@@ -78,7 +78,7 @@ public class PersonEntity {
     }
     public String isRelation(PersonEntity p){
         for(RelationEntity r:myRelations){
-            if(r.getRId().getPerson1Name().equals(p.getName())){
+            if(r.getRId().getPerson2Name().equals(p.getName())){
                 return "true";
             }
         }
