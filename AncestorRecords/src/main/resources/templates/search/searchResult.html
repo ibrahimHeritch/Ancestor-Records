@@ -60,7 +60,7 @@
             <div th:switch="${user.isFollowing(person)} ">
                 <td>
 
-                    <a class="mb-2 btn btn-success" href="@{/persons/profiles]/{id} (id=${person.getId()})}"  style="width: 150px">View Profile</a>
+                    <a class="mb-2 btn btn-success" href="@{/persons/profiles/{id} (id=${person.getId()})}"  style="width: 150px">View Profile</a>
                     <a th:case="'true'" class="mb-2 btn btn-success" th:href="@{/persons/unfollow/{id} (id=${person.getId()})}" style="width: 90px">Following</a>
 
                     <a th:case="'false'" class="mb-2 btn btn-danger" th:href="@{/persons/follow/{id} (id=${person.getId()})}" style="width: 90px">Follow</a>
