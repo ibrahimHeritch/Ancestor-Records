@@ -14,7 +14,7 @@ import javax.validation.constraints.NotBlank;
 public class RelationEntity {
 
     @EmbeddedId
-    private RelationId id;
+    private RelationId Rid;
     @NotBlank
     private String relationType;
 
@@ -22,16 +22,18 @@ public class RelationEntity {
     }
 
     public RelationEntity(PersonEntity person1, PersonEntity person2, @NotBlank String relationType) {
-        this.id = new RelationId(person1,person2);
+        this.Rid = new RelationId(person1,person2);
+        System.out.println(Rid);
         this.relationType = relationType;
     }
 
-    public RelationId getId() {
-        return id;
+    public RelationId getRId() {
+        return Rid;
     }
 
-    public void setId(RelationId id) {
-        this.id = id;
+    public void setRId(RelationId id) {
+        System.out.println("CHANGED RID");
+        this.Rid = id;
     }
 
     public String getRelationType() {
