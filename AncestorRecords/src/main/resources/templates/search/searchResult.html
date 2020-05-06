@@ -15,7 +15,7 @@
 
 <nav class="navbar navbar-expand-md navbar-dark bg-primary">
 
-    <a class="navbar-brand abs" href="#">Ancestor Records</a>
+    <a class="navbar-brand abs" href="/">Ancestor Records</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -54,7 +54,7 @@
         </thead>
         <tbody>
         <tr th:each="person :${persons}">
-            <th  th:text="${person.getFname()}"></th>
+            <td  th:text="${person.getFname()}"></td>
             <td th:text="${person.getMname()}"></td>
             <td th:text="${person.getLname()}"></td>
             <td>
@@ -62,7 +62,7 @@
                 <a class="mb-2 btn btn-success" th:href="@{/persons/follow/{id} (id=${person.getId()})}" style="width: 80px">follow</a>
 
                 <!-- Opens Modal -->
-                <a class="mb-2 btn btn-success" href="#" data-toggle="modal" th:data-target="'#family'+${person.getId()}" style="width: 80px">Add To Family</a>
+                <a class="mb-2 btn btn-success" href="#" data-toggle="modal" th:data-target="'#family'+${person.getId()}" style="width: 150px">Add To Family</a>
 
                 <!-- "Add To Family" Modal -->
                 <form th:action="@{/persons/family/{id} (id=${person.getId()})}" method="post" th:object="${relation}">
@@ -72,7 +72,12 @@
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="exampleModalLabel">Add To Family:</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
                                     <!-- Input Field -->
+                                <div class="modal-body">
                                     <div class="form-group row">
                                         <label class="col-form-label col-sm-3" for="relationType">Relation : </label>
                                         <div class="col-sm-9">
@@ -81,13 +86,12 @@
                                         </div>
                                     </div>
 
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
+
                                 </div>
                                 <div class="modal-footer">
+                                    <button class="btn btn-primary form-control" type="submit" style="width: 150px">Add To Family</button>
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button class="btn btn-primary form-control" type="submit">Add To Family</button>
+
                                 </div>
                             </div>
                         </div>

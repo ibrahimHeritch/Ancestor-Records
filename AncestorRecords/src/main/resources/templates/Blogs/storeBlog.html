@@ -15,7 +15,7 @@
 
 <nav class="navbar navbar-expand-md navbar-dark bg-primary">
 
-    <a class="navbar-brand abs" href="#">Ancestor Records</a>
+    <a class="navbar-brand abs" href="/">Ancestor Records</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -55,19 +55,22 @@
         </div>
         <div class="row">
             <label class="col-form-label col-sm-3">Subjects: </label>
+            <ul>
+
+                <!-- Subject drop-down list -->
+                <button class="btn dropdown-toggle btn-primary btn-sm" data-toggle="dropdown"
+                >Subjects<span class="subjects"></span></button>
+                <ul class="dropdown-menu", style="width:600px; height:40%; overflow:hidden; overflow-y:scroll;">
+                        <li th:each="person : ${persons}">
+
+                                <input class="form-control" id=subjects type="checkbox" name="subjects" th:value="${person.id}">
+                                <label th:text="${person.getName()}"></label>
+
+                        </li>
+                </ul>
+            </ul>
         </div>
 
-        <ul>
-
-            <!-- Subject drop-down list -->
-            <button class="btn dropdown-toggle btn-primary btn-sm" data-toggle="dropdown"
-            >Subjects<span class="subjects"></span></button>
-            <ul class="dropdown-menu", style="height:40%; overflow:hidden; overflow-y:scroll;">
-                <li th:each="person : ${persons}">
-                    <input class="form-control" id=subjects type="checkbox" name="subjects" th:value="${person.id}">
-                    <label th:text="${person.getName()}"></label>
-                </li>
-            </ul>
 
         <div class="form-group row">
             <label class="col-form-label col-sm-3" for="content">Post : </label>
