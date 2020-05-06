@@ -33,7 +33,6 @@ public class RelationEntity {
     }
 
     public void setRId(RelationId id) {
-        System.out.println("CHANGED RID");
         this.Rid = id;
     }
 

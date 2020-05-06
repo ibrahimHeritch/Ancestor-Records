@@ -60,11 +60,11 @@
                 <!-- Subject drop-down list -->
                 <button class="btn dropdown-toggle btn-primary btn-sm" data-toggle="dropdown"
                 >Subjects<span class="subjects"></span></button>
-                <ul class="dropdown-menu", style="width:600px; height:40%; overflow:hidden; overflow-y:scroll;">
+                <ul class="dropdown-menu", style="width:200px; height:40%; overflow:hidden; overflow-y:scroll;">
                         <li th:each="person : ${persons}">
-
-                                <input class="form-control" id=subjects type="checkbox" name="subjects" th:value="${person.id}">
-                                <label th:text="${person.getName()}"></label>
+                            <label for="subjects" th:text="${person.getName()}"></label>
+                                <input class="form-control" id=subjects type="checkbox" name="subjects" style="width:20px; height:20px;" th:value="${person.id}">
+                                <!-- <label th:text="${person.getName()}"></label> -->
 
                         </li>
                 </ul>
