@@ -57,7 +57,8 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="blog :${blogs}">
+        <tr th:each="blog :${blogs}" style="cursor: pointer"
+            th:onclick="'javascript:rowClicked(\'' + ${blog.getId()} + '\');'">
             <th scope="row" th:text="${blog.getTitle()}"></th>
             <td th:text="${blog.getOwner().getPerson().getName()}"></td>
             <td th:text="${blog.getNamesOfSubjects()}"></td>
@@ -91,6 +92,10 @@
     </table>
 
 </div>
-
+<script>
+    function rowClicked(value) {
+        location.href = "blogs/showBlog/" + value;
+    }
+</script>
 
 </body></html>

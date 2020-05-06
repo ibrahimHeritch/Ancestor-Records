@@ -65,8 +65,8 @@ public class BlogController {
 
     @RequestMapping(value = "/blogs/edit/{id}", method = RequestMethod.GET)
     public String editBlog(Model model,@PathVariable("id") Long id) {
-        BlogEntity hi = BlogService.findById(id);
-        model.addAttribute("blog", hi);
+        BlogEntity blog = BlogService.findById(id);
+        model.addAttribute("blog", blog);
         return "blogs/storeBlog";
     }
 
@@ -74,5 +74,12 @@ public class BlogController {
     public String deleteBlog(@PathVariable("id") Long id) {
         BlogService.deleteById(id);
         return "redirect:/";
+    }
+
+    @RequestMapping(value = "/blogs/showBlog/{id}", method = RequestMethod.GET)
+    public String showBlog(Model model,@PathVariable("id") Long id) {
+        BlogEntity blog = BlogService.findById(id);
+        model.addAttribute("blog", blog);
+        return "blogs/showBlog";
     }
 }
