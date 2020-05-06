@@ -37,7 +37,7 @@ public class PersonController {
         PersonEntity person = user.getPerson();
         model.addAttribute("relation", new RelationEntity(person,person,"unknown"));
         model.addAttribute("persons", personService.getAllPersons());
-
+        model.addAttribute("user", user.getPerson());
         return "search/searchResult";
     }
 

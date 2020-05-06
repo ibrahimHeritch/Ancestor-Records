@@ -53,30 +53,38 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="person :${persons}">
+        <tr th:each="person :${persons}" style="cursor: pointer"
+            th:onclick="'javascript:rowClicked(\'' + ${person.getId()} + '\');'">
             <td  th:text="${person.getFname()}"></td>
             <td th:text="${person.getMname()}"></td>
             <td th:text="${person.getLname()}"></td>
-            <td>
+            <div th:switch="${user.isFollowing(person)} ">
+                <td>
 
-                <a class="mb-2 btn btn-success" th:href="@{/persons/profiles/{id} (id=${person.getId()})}" style="width: 80px">View Profile</a>
-                <a class="mb-2 btn btn-success" th:href="@{/persons/follow/{id} (id=${person.getId()})}" style="width: 80px">Follow</a>
+                    <a th:case="'true'" class="mb-2 btn btn-success" th:href="@{/persons/unfollow/{id} (id=${person.getId()})}" style="width: 90px">Following</a>
 
-                <!-- Opens Modal -->
-                <a class="mb-2 btn btn-success" href="#" data-toggle="modal" th:data-target="'#family'+${person.getId()}" style="width: 150px">Add To Family</a>
+                    <a th:case="'false'" class="mb-2 btn btn-success" th:href="@{/persons/follow/{id} (id=${person.getId()})}" style="width: 80px">Follow</a>
+                </td>
+            </div>
+            <div>
+                <td th:switch="${user.isRelation(person)}" >
+                    <!-- Opens Modal -->
+                    <a th:case="'false'" class="mb-2 btn btn-success" href="#" data-toggle="modal" th:data-target="'#family'+${person.getId()}" style="width: 150px">Add To Family</a>
 
-                <!-- "Add To Family" Modal -->
-                <form th:action="@{/persons/family/{id} (id=${person.getId()})}" method="post" th:object="${relation}">
-                    <input class="form-control" type="hidden" name="otherPerson" th:value="${person.getId()}">
-                    <div class="modal fade" th:id="'family'+${person.getId()}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Add To Family:</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
+                    <a th:case="'true'" class="mb-2 btn btn-success" href="@{/persons/unfamily/{id} (id=${person.getId()})}"  style="width: 150px">My Family</a>
+
+                    <!-- "Add To Family" Modal -->
+                    <form th:action="@{/persons/family/{id} (id=${person.getId()})}" method="post" th:object="${relation}">
+                        <input class="form-control" type="hidden" name="otherPerson" th:value="${person.getId()}">
+                        <div class="modal fade" th:id="'family'+${person.getId()}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Add To Family:</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
                                     <!-- Input Field -->
                                 <div class="modal-body">
                                     <div class="form-group row">
@@ -88,22 +96,27 @@
                                     </div>
 
 
-                                </div>
-                                <div class="modal-footer">
-                                    <button class="btn btn-primary form-control" type="submit" style="width: 150px">Add To Family</button>
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button class="btn btn-primary form-control" type="submit" style="width: 150px">Add To Family</button>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </form>
-            </td>
+                    </form>
+                </td>
+            </div>
         </tr>
         </tbody>
     </table>
 
 </div>
-
+<script>
+    function rowClicked(value) {
+        location.href = "/persons/profiles/" + value;
+    }
+</script>
 
 </body></html>

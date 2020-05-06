@@ -68,7 +68,23 @@ public class PersonEntity {
     public void setBlogsAboutMe(List<BlogEntity> blogsAboutMe) {
         this.blogsAboutMe = blogsAboutMe;
     }
+    public String isFollowing(PersonEntity p){
 
+        if(following.contains(p)){
+            return "true";
+        }else{
+            return "false";
+        }
+    }
+    public String isRelation(PersonEntity p){
+        for(RelationEntity r:myRelations){
+            if(r.getRId().getPerson1Name().equals(p.getName())){
+                return "true";
+            }
+        }
+        return "false";
+
+    }
     public Long getId() {
         return id;
     }
