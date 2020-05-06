@@ -68,6 +68,7 @@ public class BlogController {
     public String editBlog(Model model,@PathVariable("id") Long id) {
         BlogEntity blog = BlogService.findById(id);
         model.addAttribute("blog", blog);
+        model.addAttribute("persons", personService.getAllPersons());
         return "blogs/storeBlog";
     }
 

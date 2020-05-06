@@ -53,17 +53,17 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="person :${persons}" style="cursor: pointer"
-            th:onclick="'javascript:rowClicked(\'' + ${person.getId()} + '\');'">
+        <tr th:each="person :${persons}">
             <td  th:text="${person.getFname()}"></td>
             <td th:text="${person.getMname()}"></td>
             <td th:text="${person.getLname()}"></td>
             <div th:switch="${user.isFollowing(person)} ">
                 <td>
 
+                    <a class="mb-2 btn btn-success" href="@{/persons/profiles/{id} (id=${person.getId()})}"  style="width: 150px">View Profile</a>
                     <a th:case="'true'" class="mb-2 btn btn-success" th:href="@{/persons/unfollow/{id} (id=${person.getId()})}" style="width: 90px">Following</a>
 
-                    <a th:case="'false'" class="mb-2 btn btn-success" th:href="@{/persons/follow/{id} (id=${person.getId()})}" style="width: 80px">Follow</a>
+                    <a th:case="'false'" class="mb-2 btn btn-danger" th:href="@{/persons/follow/{id} (id=${person.getId()})}" style="width: 90px">Follow</a>
                 </td>
             </div>
             <div>
@@ -71,7 +71,7 @@
                     <!-- Opens Modal -->
                     <a th:case="'false'" class="mb-2 btn btn-success" href="#" data-toggle="modal" th:data-target="'#family'+${person.getId()}" style="width: 150px">Add To Family</a>
 
-                    <a th:case="'true'" class="mb-2 btn btn-success" href="@{/persons/unfamily/{id} (id=${person.getId()})}"  style="width: 150px">My Family</a>
+                    <a th:case="'true'" class="mb-2 btn btn-danger" href="@{/persons/unfamily/{id} (id=${person.getId()})}"  style="width: 150px">My Family</a>
 
                     <!-- "Add To Family" Modal -->
                     <form th:action="@{/persons/family/{id} (id=${person.getId()})}" method="post" th:object="${relation}">

@@ -8,6 +8,7 @@ import com.uncc.ticket.service.PersonService;
 import com.uncc.ticket.service.RelationService;
 import com.uncc.ticket.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -55,15 +56,19 @@ public class PersonController {
 
     //Sets relation
     @RequestMapping(value = "/persons/family/{id}", method = RequestMethod.POST)
-    public String addRelation(Model model, @ModelAttribute(name = "relation") @Valid RelationEntity Relation, @PathVariable("id") Long id, @RequestParam("relationType") String relationType, @RequestParam("otherPerson") PersonEntity otherPerson, Principal principal) {
-        System.out.println("Setting Relation...");
-        PersonEntity person1 = usersService.findByEmail(principal.getName()).getPerson();
-        System.out.println("P1: " + person1.getName());
-        PersonEntity person2 = otherPerson;
-        System.out.println("P2: " + person2.getName());
-        RelationEntity r= new RelationEntity(person1,person2, relationType);
-        relationService.storeRelation(r);
-        return "redirect:/";
+    public String addRelation(Model model, @ModelAttribute(name = "relation") @Valid RelationEntity Relation, @PathVariable("id") Long id, @RequestParam("relationType") String relationType, @RequestParam("otherPerson") PersonEntity otherPerson, BindingResult bindingResult, Principal principal) {
+        if (bindingResult.hasErrors()) {
+            return "search/searchResults";
+        }
+        try {
+            PersonEntity person1 = usersService.findByEmail(principal.getName()).getPerson();
+            PersonEntity person2 = otherPerson;
+            RelationEntity r = new RelationEntity(person1, person2, relationType);
+            relationService.storeRelation(r);
+            return "redirect:/";
+        } catch (DataIntegrityViolationException e) {
+            return "search/searchResults";
+        }
     }
 
     @RequestMapping(value = "/persons/addPersons", method = RequestMethod.GET)
@@ -79,10 +84,11 @@ public class PersonController {
     }
     
     @RequestMapping(value = "/persons/myProfile", method = RequestMethod.GET)
-    public String profile(Model model) {
-        model.addAttribute("person", new PersonEntity());
-        model.addAttribute("persons", personService.getAllPersons());
-        return "persons/myProfile";
+    public String profile(Model model, Principal principal) {
+        UsersEntity user = usersService.findByEmail(principal.getName());
+        PersonEntity person = user.getPerson();
+        model.addAttribute("person", person);
+        return "persons/profile";
     }
 
     @RequestMapping(value = "/persons/profiles/{id}", method = RequestMethod.GET)

@@ -27,7 +27,7 @@ public class RelationId implements Serializable {
     public RelationId(PersonEntity p1, PersonEntity p2) {
         //if(person1.getId()<person2.getId()){ // this assures the Ids (a,b) and (b,a) are considered the same
             this.person1Id = p1.getId();
-            this.person1Name = p2.getName();
+            this.person1Name = p1.getName();
             this.person2Id = p2.getId();
             this.person2Name = p2.getName();
         //}else{
@@ -54,7 +54,7 @@ public class RelationId implements Serializable {
     }
 
     public String getPerson1Name() { return person1Name;}
-    public String getPerson2Name() { System.out.println("PERSON 2: " + person2Name); return person2Name;}
+    public String getPerson2Name() { return person2Name;}
 
     @Override
     public boolean equals(Object o) {

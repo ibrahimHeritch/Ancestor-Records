@@ -43,11 +43,15 @@
 
 <div class="container-fluid m-0 p-4">
 
-        <h1>
-            <td>
-                <th  th:text="${person.getName()}"></th>
-            </td>
-        </h1>
+        <ul style="list-style-type:none">
+            <div class="card">
+                <h1 th:text="${person.getName()}"></h1>
+                City: <p th:text="${person.getCityOfBirth()}"></p>
+                Country: <p th:text="${person.getCountryOfBirth()}"></p>
+                Birthday: <p th:text="${person.getDOB()}"></p>
+            </div>
+        </ul>
+
     <table class="table">
         <thead class="thead-light">
         <tr>
@@ -65,8 +69,8 @@
     <table class="table">
         <thead class="thead-light">
         <tr>
-            <th scope="col">People Who Call You Family</th>
-            <th scope="col">Your Relation To Them</th>
+            <th scope="col">People Who Call Them Family</th>
+            <th scope="col">Their Relation</th>
         </tr>
         </thead>
         <tbody>
